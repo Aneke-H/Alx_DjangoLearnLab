@@ -7,5 +7,5 @@ def is_librarian(user):
 
 @user_passes_test(is_librarian)
 @login_required
-def librarian_view(request):
+def Librarian(request):
     return render(request, 'relationship_app/librarian_view.html')

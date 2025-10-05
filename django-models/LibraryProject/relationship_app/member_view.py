@@ -7,5 +7,5 @@ def is_member(user):
 
 @user_passes_test(is_member)
 @login_required
-def member_view(request):
+def Member(request):
     return render(request, 'relationship_app/member_view.html')
