@@ -8,7 +8,8 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 
-
+from .models import Book, Library
+from .models import UserProfile
 
 # Create your views here.
 def list_books(request):
@@ -30,15 +31,15 @@ class register(CreateView):
     template_name = 'relationship_app/register.html'
     
 
-#Helper function
+# Helper functions
 def is_admin(user):
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Admin'
 
 def is_librarian(user):
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
 
 def is_member(user):
-    return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
+    return user.is_authenticated and hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
 
 
 @user_passes_test(is_admin)
